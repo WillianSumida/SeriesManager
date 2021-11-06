@@ -11,6 +11,7 @@ import com.example.seriesmanager.adapter.serie.SerieRvAdapter
 import com.example.seriesmanager.controller.serie.SerieController
 import com.example.seriesmanager.databinding.ActivityMainBinding
 import com.example.seriesmanager.model.serie.Serie
+import com.example.seriesmanager.model.temporada.Temporada
 
 class MainActivity : AppCompatActivity(), OnSerieClickListener {
 
@@ -126,7 +127,10 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
 
     override fun onSerieClick(posicao: Int) {
         //levar para a pagina de series
-
+        val serie = seriesList[posicao]
+        val consultarSerieTemporadaIntent = Intent(this, MainTemporadaActivity::class.java)
+        consultarSerieTemporadaIntent.putExtra(EXTRA_SERIE, serie)
+        startActivity(consultarSerieTemporadaIntent)
 
     }
 }
