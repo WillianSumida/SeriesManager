@@ -75,7 +75,6 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
             TABELA_TEMPORADA,
             null, //tabela
             "${COLUNA_NOME_SERIE} = ?", //where,
-
             arrayOf(nomeSerie), //valores do where
             null,
             null,

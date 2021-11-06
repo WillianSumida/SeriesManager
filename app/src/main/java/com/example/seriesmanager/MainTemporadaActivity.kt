@@ -41,7 +41,7 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
     //data source
     private val temporadasList: MutableList<Temporada> by lazy {
         serie = intent.getParcelableExtra(MainActivity.EXTRA_SERIE)!!
-        temporadaController.listAllTemporada(serie.nome.toString())
+        temporadaController.listAllTemporada(serie.nome)
     }
 
     //adapter
@@ -80,8 +80,8 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
                 resultado->
 
             if (resultado.resultCode == RESULT_OK) {
-                val posicao = resultado.data?.getIntExtra(MainTemporadaActivity.EXTRA_POSICAO, -1)
-                resultado.data?.getParcelableExtra<Temporada>(MainTemporadaActivity.EXTRA_TEMPORADA)?.apply {
+                val posicao = resultado.data?.getIntExtra(EXTRA_POSICAO, -1)
+                resultado.data?.getParcelableExtra<Temporada>(EXTRA_TEMPORADA)?.apply {
                     if(posicao != null && posicao != -1) {
                         temporadaController.updateTemporada(this)
                         temporadasList[posicao] = this
@@ -114,8 +114,8 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
                 val temporada = temporadasList[posicao]
                 val editarTemporadaIntent = Intent(this, TemporadaActivity::class.java)
 
-                editarTemporadaIntent.putExtra(MainTemporadaActivity.EXTRA_TEMPORADA, temporada)
-                editarTemporadaIntent.putExtra(MainTemporadaActivity.EXTRA_POSICAO, posicao)
+                editarTemporadaIntent.putExtra(EXTRA_TEMPORADA, temporada)
+                editarTemporadaIntent.putExtra(EXTRA_POSICAO, posicao)
                 editarTemporadaActivityResultLauncher.launch(editarTemporadaIntent)
 
                 true
