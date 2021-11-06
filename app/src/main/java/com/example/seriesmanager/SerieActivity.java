@@ -25,8 +25,8 @@ public class SerieActivity extends AppCompatActivity {
                 (View view ) -> {
                     serie = new Serie(
                             activitySerieBinding.nomeEt.getText().toString(),
-                            activitySerieBinding.emissoraEt.getText().toString(),
                             activitySerieBinding.anoLancamentoEt.getText().toString(),
+                            activitySerieBinding.emissoraEt.getText().toString(),
                             activitySerieBinding.generoEt.getText().toString()
                     );
 
@@ -48,8 +48,8 @@ public class SerieActivity extends AppCompatActivity {
         if (serie != null){
             activitySerieBinding.nomeEt.setEnabled(false);
             activitySerieBinding.nomeEt.setText(serie.getNome());
-            activitySerieBinding.emissoraEt.setText(serie.getEmissora());
             activitySerieBinding.anoLancamentoEt.setText(serie.getAnoDeLancamento());
+            activitySerieBinding.emissoraEt.setText(serie.getEmissora());
             activitySerieBinding.generoEt.setText(serie.getGenero());
 
 

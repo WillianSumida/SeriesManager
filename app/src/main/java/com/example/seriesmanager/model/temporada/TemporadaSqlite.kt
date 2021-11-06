@@ -11,27 +11,20 @@ import com.example.seriesmanager.model.serie.Serie
 
 class TemporadaSqlite(contexto: Context): TemporadaDao {
     companion object{
-        //foreign key
-        private val TABELA_SERIE = "serie"
-        private val COLUNA_NOME = "nome"
-
-        //table
         private val BD_SERIES_MANAGER = "seriesManager"
         private val TABELA_TEMPORADA = "temporada"
         private val COLUNA_NUMERO_TEMPORADA = "numero_temporada"
         private val COLUNA_ANO_LANCAMENTO = "ano_lancamento"
-        private val COLUNA_QTDE_EPISODIOS = "qtde_episodios"
-        private val COLUNA_NOME_SERIE = "nome_serie"
+        private val COLUNA_QTD_EPISODES = "qtd_episodes"
+        private val COLUNA_NOME_SERIE = "nome_Serie"
 
 
-        private val CRIAR_TABELA_TEMPORADA_STMT = "CREATE TABLE IF NOT EXISTS ${TABELA_TEMPORADA} (" +
-                "${COLUNA_NUMERO_TEMPORADA} INT NOT NULL PRIMARY KEY, " +
-                "${COLUNA_ANO_LANCAMENTO} TEXT NOT NULL, " +
-                "${COLUNA_QTDE_EPISODIOS} TEXT NOT NULL, " +
-                "${COLUNA_NOME_SERIE} TEXT NOT NULL, " +
-                "FOREIGN KEY (${COLUNA_NOME_SERIE}) REFERENCES ${TABELA_SERIE}(${COLUNA_NOME}));"
+        private val CRIAR_TABELA_TEMPORADA_STMT = "CREATE TABLE IF NOT EXISTS $TABELA_TEMPORADA (" +
+                "$COLUNA_NUMERO_TEMPORADA TEXT NOT NULL, " +
+                "$COLUNA_ANO_LANCAMENTO TEXT NOT NULL, " +
+                "$COLUNA_QTD_EPISODES TEXT NOT NULL, " +
+                "$COLUNA_NOME_SERIE TEXT NOT NULL);"
     }
-
     //Referecia para o db
     private val temporadasDb: SQLiteDatabase
     init{
@@ -45,10 +38,10 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
 
     override fun createTemporada(temporada: Temporada): Long {
         val temporadaCv = convertTemporadaContentValues(temporada)
-        return temporadasDb.insert(TemporadaSqlite.TABELA_TEMPORADA, null, temporadaCv)
+        return temporadasDb.insert(TABELA_TEMPORADA, null, temporadaCv)
     }
 
-    override fun listOneTemporada(numeroDaTemporada: Int): Temporada {
+    override fun listOneTemporada(numeroTemporada: String): Temporada {
         val temporadaCursor = temporadasDb.query(
             true,
             TABELA_TEMPORADA,
@@ -64,9 +57,9 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
         return if(temporadaCursor.moveToFirst()){
             with(temporadaCursor){
                 Temporada(
-                    getInt(getColumnIndexOrThrow(COLUNA_NUMERO_TEMPORADA)),
+                    getString(getColumnIndexOrThrow(COLUNA_NUMERO_TEMPORADA)),
                     getString(getColumnIndexOrThrow(COLUNA_ANO_LANCAMENTO)),
-                    getInt(getColumnIndexOrThrow(COLUNA_QTDE_EPISODIOS)),
+                    getString(getColumnIndexOrThrow(COLUNA_QTD_EPISODES)),
                     getString(getColumnIndexOrThrow(COLUNA_NOME_SERIE)),
                 )
             }
@@ -76,13 +69,14 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
         }
     }
 
-    override fun litsAllTemporada(): MutableList<Temporada> {
-        val temporadaCursor = temporadasDb.query(
+    override fun litsAllTemporada(nomeSerie: String): MutableList<Temporada> {
+        val temporadasCursor = temporadasDb.query(
             true,
             TABELA_TEMPORADA,
             null, //tabela
-            null, //where,
-            arrayOf(), //valores do where
+            "${COLUNA_NOME_SERIE} = ?", //where,
+
+            arrayOf(nomeSerie), //valores do where
             null,
             null,
             null,
@@ -90,13 +84,13 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
         )
 
         val temporadasList: MutableList<Temporada> = mutableListOf()
-        while(temporadaCursor.moveToNext()){
-            with(temporadaCursor){
+        while(temporadasCursor.moveToNext()){
+            with(temporadasCursor){
                 temporadasList.add(
                     Temporada(
-                        getInt(getColumnIndexOrThrow(COLUNA_NUMERO_TEMPORADA)),
+                        getString(getColumnIndexOrThrow(COLUNA_NUMERO_TEMPORADA)),
                         getString(getColumnIndexOrThrow(COLUNA_ANO_LANCAMENTO)),
-                        getInt(getColumnIndexOrThrow(COLUNA_QTDE_EPISODIOS)),
+                        getString(getColumnIndexOrThrow(COLUNA_QTD_EPISODES)),
                         getString(getColumnIndexOrThrow(COLUNA_NOME_SERIE)),
                     )
                 )
@@ -107,19 +101,19 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
 
     override fun updateTemporada(temporada: Temporada): Int {
         val temporadaCv = convertTemporadaContentValues(temporada)
-        return temporadasDb.update(TABELA_TEMPORADA, temporadaCv, "${COLUNA_NUMERO_TEMPORADA} = ?", arrayOf(temporada.qtdeEpisodios.toString()))
+        return temporadasDb.update(TABELA_TEMPORADA, temporadaCv, "${COLUNA_NUMERO_TEMPORADA} = ?", arrayOf(temporada.numeroTemporada))
     }
 
-    override fun deleteTemporada(numeroDaTemporada: Int): Int {
-        return temporadasDb.delete(TABELA_TEMPORADA, "${COLUNA_NUMERO_TEMPORADA} = ?",  arrayOf(listOneTemporada(numeroDaTemporada).numeroDaTemporada.toString()))
+    override fun deleteTemporada(numeroTemporada: String): Int {
+        return temporadasDb.delete(TABELA_TEMPORADA, "${COLUNA_NUMERO_TEMPORADA} = ?", arrayOf(numeroTemporada))
     }
 
     private fun convertTemporadaContentValues(temporada: Temporada): ContentValues = ContentValues().also{
         with(it){
-            put(TemporadaSqlite.COLUNA_NUMERO_TEMPORADA, temporada.numeroDaTemporada)
-            put(TemporadaSqlite.COLUNA_ANO_LANCAMENTO, temporada.anoDeLancamento)
-            put(TemporadaSqlite.COLUNA_QTDE_EPISODIOS, temporada.qtdeEpisodios)
-            put(TemporadaSqlite.COLUNA_NOME_SERIE, temporada.nomeSerie)
+            put(COLUNA_NUMERO_TEMPORADA, temporada.numeroTemporada)
+            put(COLUNA_ANO_LANCAMENTO, temporada.anoDeLancamento)
+            put(COLUNA_QTD_EPISODES, temporada.qtdEpisodes)
+            put(COLUNA_NOME_SERIE, temporada.nomeSerie)
         }
     }
 }

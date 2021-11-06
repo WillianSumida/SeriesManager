@@ -5,8 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Temporada(
-    val numeroDaTemporada: Int = 0, //primary key
+    val numeroTemporada: String = "", //primary key
     val anoDeLancamento: String = "",
-    val qtdeEpisodios: Int = 0,
+    val qtdEpisodes: String = "",
     val nomeSerie: String = "",
-): Parcelable
+): Parcelable {
+}

@@ -19,24 +19,24 @@ class SerieRvAdapter (
     //view holder
     inner class SerieLayoutHolder(layoutSerieBinding: LayoutSerieBinding):
         RecyclerView.ViewHolder(layoutSerieBinding.root), View.OnCreateContextMenuListener{
-            val nomeTv: TextView = layoutSerieBinding.nomeTv
-            val emissoraTv: TextView = layoutSerieBinding.emissoraTv
-            val generoTv: TextView =  layoutSerieBinding.generoTv
+        val nomeTv: TextView = layoutSerieBinding.nomeTv
+        val emissoraTv: TextView = layoutSerieBinding.emissoraTv
+        val generoTv: TextView =  layoutSerieBinding.generoTv
 
-            init{
-                itemView.setOnCreateContextMenuListener(this)
-            }
+        init{
+            itemView.setOnCreateContextMenuListener(this)
+        }
 
-            override fun onCreateContextMenu(
-                menu: ContextMenu?,
-                view: View?,
-                menuInfo: ContextMenu.ContextMenuInfo?
-            ) {
-                MenuInflater(view?.context).inflate(R.menu.context_menu_serie, menu)
-            }
+        override fun onCreateContextMenu(
+            menu: ContextMenu?,
+            view: View?,
+            menuInfo: ContextMenu.ContextMenuInfo?
+        ) {
+            MenuInflater(view?.context).inflate(R.menu.context_menu_serie, menu)
+        }
     }
 
-    //quando uma nova celular precisa ser criada
+    //quando uma nova celula precisa ser criada
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SerieLayoutHolder {
         //criar celula
         val layoutSerieBinding = LayoutSerieBinding.inflate(LayoutInflater.from(parent.context), parent, false)

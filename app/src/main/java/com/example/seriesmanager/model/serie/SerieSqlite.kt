@@ -9,7 +9,7 @@ import com.example.seriesmanager.model.serie.Serie
 
 class SerieSqlite(contexto: Context): SerieDao {
 
-    companion object{
+    companion object {
         private val BD_SERIES_MANAGER = "seriesManager"
         private val TABELA_SERIE = "serie"
         private val COLUNA_NOME = "nome"
@@ -18,20 +18,21 @@ class SerieSqlite(contexto: Context): SerieDao {
         private val COLUNA_GENERO = "genero"
 
 
-        private val CRIAR_TABELA_SERIE_STMT = "CREATE TABLE IF NOT EXISTS ${TABELA_SERIE} (" +
-                "${COLUNA_NOME} TEXT NOT NULL PRIMARY KEY, " +
-                "${COLUNA_ANO_LANCAMENTO} TEXT NOT NULL, " +
-                "${COLUNA_EMISSORA} TEXT NOT NULL, " +
-                "${COLUNA_GENERO} TEXT NOT NULL);"
+        private val CRIAR_TABELA_SERIE_STMT = "CREATE TABLE IF NOT EXISTS $TABELA_SERIE (" +
+                "$COLUNA_NOME TEXT NOT NULL PRIMARY KEY, " +
+                "$COLUNA_ANO_LANCAMENTO TEXT NOT NULL, " +
+                "$COLUNA_EMISSORA TEXT NOT NULL, " +
+                "$COLUNA_GENERO TEXT NOT NULL);"
     }
 
     //Referecia para o db
     private val seriesDb: SQLiteDatabase
-    init{
+
+    init {
         seriesDb = contexto.openOrCreateDatabase(BD_SERIES_MANAGER, Context.MODE_PRIVATE, null)
         try {
             seriesDb.execSQL(CRIAR_TABELA_SERIE_STMT)
-        } catch (se: android.database.SQLException){
+        } catch (se: android.database.SQLException) {
             Log.e(contexto.getString(R.string.app_name), se.toString())
         }
     }
@@ -46,7 +47,7 @@ class SerieSqlite(contexto: Context): SerieDao {
             true,
             TABELA_SERIE,
             null, //tabela
-            "${COLUNA_NOME} = ?", //where,
+            "$COLUNA_NOME = ?", //where,
             null, //valores do where
             null,
             null,
@@ -54,8 +55,8 @@ class SerieSqlite(contexto: Context): SerieDao {
             null
         )
 
-        return if(serieCursor.moveToFirst()){
-            with(serieCursor){
+        return if (serieCursor.moveToFirst()) {
+            with(serieCursor) {
                 Serie(
                     getString(getColumnIndexOrThrow(COLUNA_NOME)),
                     getString(getColumnIndexOrThrow(COLUNA_ANO_LANCAMENTO)),
@@ -63,8 +64,7 @@ class SerieSqlite(contexto: Context): SerieDao {
                     getString(getColumnIndexOrThrow(COLUNA_GENERO)),
                 )
             }
-        }
-        else{
+        } else {
             Serie()
         }
     }
@@ -83,8 +83,8 @@ class SerieSqlite(contexto: Context): SerieDao {
         )
 
         val seriesList: MutableList<Serie> = mutableListOf()
-        while(serieCursor.moveToNext()){
-            with(serieCursor){
+        while (serieCursor.moveToNext()) {
+            with(serieCursor) {
                 seriesList.add(
                     Serie(
                         getString(getColumnIndexOrThrow(COLUNA_NOME)),
@@ -100,20 +100,19 @@ class SerieSqlite(contexto: Context): SerieDao {
 
     override fun updateSerie(serie: Serie): Int {
         val serieCv = convertSerieContentValues(serie)
-        return seriesDb.update(TABELA_SERIE, serieCv, "${COLUNA_NOME} = ?", arrayOf(serie.nome))
+        return seriesDb.update(TABELA_SERIE, serieCv, "$COLUNA_NOME = ?", arrayOf(serie.nome))
     }
 
     override fun deleteSerie(nome: String): Int {
-        return seriesDb.delete(TABELA_SERIE, "${COLUNA_NOME} = ?", arrayOf(listOneSerie(nome).nome))
+        return seriesDb.delete(TABELA_SERIE, "$COLUNA_NOME = ?", arrayOf(listOneSerie(nome).nome))
     }
 
-    private fun convertSerieContentValues(serie: Serie): ContentValues = ContentValues().also{
-        with(it){
+    private fun convertSerieContentValues(serie: Serie): ContentValues = ContentValues().also {
+        with(it) {
             put(COLUNA_NOME, serie.nome)
             put(COLUNA_ANO_LANCAMENTO, serie.anoDeLancamento)
             put(COLUNA_EMISSORA, serie.emissora)
             put(COLUNA_GENERO, serie.genero)
         }
     }
-
 }

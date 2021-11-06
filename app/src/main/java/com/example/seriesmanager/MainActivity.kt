@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
 
         return when (item.itemId){
             R.id.detalharSerieMi -> {
-                //detalhes da serie
+                //ver detalhes serie
                 val serie = seriesList[posicao]
                 val consultarSerieIntent = Intent(this, SerieActivity::class.java)
                 consultarSerieIntent.putExtra(EXTRA_SERIE, serie)
@@ -125,10 +125,8 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
     }
 
     override fun onSerieClick(posicao: Int) {
-        //ir para tela das temporadas
-        val serie = seriesList[posicao]
-        val consultarSerieIntent = Intent(this, SerieActivity::class.java)
-        consultarSerieIntent.putExtra(EXTRA_SERIE, serie)
-        startActivity(consultarSerieIntent)
+        //levar para a pagina de series
+
+
     }
 }
