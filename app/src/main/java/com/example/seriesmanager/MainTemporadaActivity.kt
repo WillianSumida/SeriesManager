@@ -136,6 +136,10 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
     }
 
     override fun onTemporadaClick(posicao: Int) {
-        //mandar para a pag de capitulo
+        val temporada = temporadasList[posicao]
+        val consultarEpisodioTemporada = Intent(this, MainEpisodioActivity::class.java)
+        consultarEpisodioTemporada.putExtra(EXTRA_SERIE, serie)
+        consultarEpisodioTemporada.putExtra(EXTRA_TEMPORADA, temporada)
+        startActivity(consultarEpisodioTemporada)
     }
 }

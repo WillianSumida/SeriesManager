@@ -82,7 +82,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 val posicao = resultado.data?.getIntExtra(MainEpisodioActivity.EXTRA_POSICAO, -1)
-                resultado.data?.getParcelableExtra<Temporada>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
+                resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
                     if(posicao != null && posicao != -1) {
                         episodioController.updateEpisodio(this)
                         episodiosist[posicao] = this
@@ -97,7 +97,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             temporada = intent.getParcelableExtra(MainTemporadaActivity.EXTRA_TEMPORADA)!!
 
             episodioActivityResultLauncher.launch(Intent(this,
-                TemporadaActivity::class.java).putExtra(MainTemporadaActivity.EXTRA_SERIE, serie).putExtra(MainTemporadaActivity.EXTRA_TEMPORADA, temporada))
+                EpisodioActivity::class.java).putExtra(MainTemporadaActivity.EXTRA_SERIE, serie).putExtra(MainTemporadaActivity.EXTRA_TEMPORADA, temporada))
         }
     }
 
@@ -108,7 +108,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             R.id.detalharEpisodioMi -> {
                 //ver detalhes serie
                 val episodio = episodiosist[posicao]
-                val consultarEpisodioIntent = Intent(this, EpisodioActvitiy::class.java)
+                val consultarEpisodioIntent = Intent(this, EpisodioActivity::class.java)
                 consultarEpisodioIntent.putExtra(MainEpisodioActivity.EXTRA_EPISODIO, episodio)
                 startActivity(consultarEpisodioIntent)
 
@@ -139,6 +139,9 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
     }
 
     override fun onEpisodioClick(posicao: Int) {
-        TODO("Not yet implemented")
+        val episodio = episodiosist[posicao]
+        val consultarEpisodioIntent = Intent(this, EpisodioActivity::class.java)
+        consultarEpisodioIntent.putExtra(MainEpisodioActivity.EXTRA_EPISODIO, episodio)
+        startActivity(consultarEpisodioIntent)
     }
 }
