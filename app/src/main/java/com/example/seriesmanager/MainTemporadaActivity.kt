@@ -120,7 +120,7 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
 
                 true
             }
-            R.id.removerSerieMi -> {
+            R.id.removerTemporadaMi -> {
                 //remover serie
                 temporadaController.deleteTemporada(temporadasList[posicao].numeroTemporada)
                 temporadasList.removeAt(posicao)

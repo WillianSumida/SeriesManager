@@ -104,7 +104,7 @@ class SerieSqlite(contexto: Context): SerieDao {
     }
 
     override fun deleteSerie(nome: String): Int {
-        return seriesDb.delete(TABELA_SERIE, "$COLUNA_NOME = ?", arrayOf(listOneSerie(nome).nome))
+        return seriesDb.delete(TABELA_SERIE, "$COLUNA_NOME = ?", arrayOf(nome))
     }
 
     private fun convertSerieContentValues(serie: Serie): ContentValues = ContentValues().also {

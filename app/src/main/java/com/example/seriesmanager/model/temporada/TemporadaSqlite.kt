@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
+import android.widget.Toast
 import com.example.seriesmanager.R
 import com.example.seriesmanager.model.SerieDao
 import com.example.seriesmanager.model.SerieSqlite
@@ -81,6 +82,8 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
             null,
             null
         )
+
+
 
         val temporadasList: MutableList<Temporada> = mutableListOf()
         while(temporadasCursor.moveToNext()){
