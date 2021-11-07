@@ -92,7 +92,9 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
         }
 
         activityMainTemporadaBinding.adicionarTemporadaFab.setOnClickListener{
-            temporadaActivityResultLauncher.launch(Intent(this, TemporadaActivity::class.java))
+            serie = intent.getParcelableExtra(MainActivity.EXTRA_SERIE)!!
+
+            temporadaActivityResultLauncher.launch(Intent(this, TemporadaActivity::class.java).putExtra(MainActivity.EXTRA_SERIE, serie))
         }
     }
 
