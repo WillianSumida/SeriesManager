@@ -3,6 +3,7 @@ package com.example.seriesmanager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,15 +40,16 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
     }
 
     //data source
-    private val episodiosist: MutableList<Episodio> by lazy {
+    private val episodioslist: MutableList<Episodio> by lazy {
         serie = intent.getParcelableExtra(MainTemporadaActivity.EXTRA_SERIE)!!
         temporada = intent.getParcelableExtra(MainTemporadaActivity.EXTRA_TEMPORADA)!!
         episodioController.listAllEpisodio(serie.nome, temporada.numeroTemporada)
     }
 
+
     //adapter
     private val episodioAdapter: EpisodioRvAdapter by lazy{
-        EpisodioRvAdapter(this, episodiosist)
+        EpisodioRvAdapter(this, episodioslist)
     }
 
     //layoutManager
@@ -60,6 +62,8 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
         super.onCreate(savedInstanceState)
         setContentView(activityMainEpisodioBinding.root)
 
+        Log.i("tag", episodioslist.size.toString())
+
         //associar adapter e layoutManager ao recyclerView
         activityMainEpisodioBinding.episodiosRv.adapter = episodioAdapter
         activityMainEpisodioBinding.episodiosRv.layoutManager = episodiosLayoutManager
@@ -71,7 +75,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
                     episodioController.insertEpisodio(this)
-                    episodiosist.add(this)
+                    episodioslist.add(this)
                     episodioAdapter.notifyDataSetChanged()
                 }
             }
@@ -85,7 +89,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
                 resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
                     if(posicao != null && posicao != -1) {
                         episodioController.updateEpisodio(this)
-                        episodiosist[posicao] = this
+                        episodioslist[posicao] = this
                         episodioAdapter.notifyDataSetChanged()
                     }
                 }
@@ -107,7 +111,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
         return when (item.itemId){
             R.id.detalharEpisodioMi -> {
                 //ver detalhes serie
-                val episodio = episodiosist[posicao]
+                val episodio = episodioslist[posicao]
                 val consultarEpisodioIntent = Intent(this, EpisodioActivity::class.java)
                 consultarEpisodioIntent.putExtra(MainEpisodioActivity.EXTRA_EPISODIO, episodio)
                 startActivity(consultarEpisodioIntent)
@@ -116,7 +120,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             }
             R.id.editarEpisodioMi -> {
                 //editar serie
-                val episodio = episodiosist[posicao]
+                val episodio = episodioslist[posicao]
                 val editarEpisodioIntent = Intent(this, EpisodioActivity::class.java)
 
                 editarEpisodioIntent.putExtra(MainEpisodioActivity.EXTRA_EPISODIO, episodio)
@@ -127,8 +131,8 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             }
             R.id.removerTemporadaMi -> {
                 //remover serie
-                episodioController.deleteEpisodio(episodiosist[posicao])
-                episodiosist.removeAt(posicao)
+                episodioController.deleteEpisodio(episodioslist[posicao])
+                episodioslist.removeAt(posicao)
                 episodioAdapter.notifyDataSetChanged()
                 true
             }
@@ -139,7 +143,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
     }
 
     override fun onEpisodioClick(posicao: Int) {
-        val episodio = episodiosist[posicao]
+        val episodio = episodioslist[posicao]
         val consultarEpisodioIntent = Intent(this, EpisodioActivity::class.java)
         consultarEpisodioIntent.putExtra(MainEpisodioActivity.EXTRA_EPISODIO, episodio)
         startActivity(consultarEpisodioIntent)

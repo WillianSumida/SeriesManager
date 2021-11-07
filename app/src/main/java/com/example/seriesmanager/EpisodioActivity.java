@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.seriesmanager.databinding.ActivityEpisodioBinding;
@@ -43,9 +44,10 @@ public class EpisodioActivity extends AppCompatActivity {
                             activityEpisodioBinding.numeroEpisodioEt.getText().toString(),
                             activityEpisodioBinding.nomeEpisodioEt.getText().toString(),
                             activityEpisodioBinding.duracaoEt.getText().toString(),
+                            activityEpisodioBinding.assistidoCb.isChecked() ? "true" : "false",
                             activityEpisodioBinding.nomeSerieEt.getText().toString(),
-                            activityEpisodioBinding.temporadaEt.getText().toString(),
-                            activityEpisodioBinding.assistidoCb.isChecked() ? "true" : "false"
+                            activityEpisodioBinding.temporadaEt.getText().toString()
+
                     );
 
                     Intent resultIntent = new Intent();
@@ -64,6 +66,7 @@ public class EpisodioActivity extends AppCompatActivity {
         posicao = getIntent().getIntExtra(MainEpisodioActivity.EXTRA_POSICAO, -1);
         episodio = getIntent().getParcelableExtra(MainEpisodioActivity.EXTRA_EPISODIO);
         if (episodio != null){
+            Log.i("tag", episodio.getAssistido());
             activityEpisodioBinding.numeroEpisodioEt.setEnabled(false);
             activityEpisodioBinding.numeroEpisodioEt.setText(episodio.getNumeroEpisodio());
             activityEpisodioBinding.nomeEpisodioEt.setText(episodio.getNomeEpisodio());
@@ -73,12 +76,8 @@ public class EpisodioActivity extends AppCompatActivity {
             activityEpisodioBinding.temporadaEt.setEnabled(false);
             activityEpisodioBinding.temporadaEt.setText(episodio.getTemporada());
 
-            if(episodio.getAssistido() == "true"){
-                activityEpisodioBinding.assistidoCb.setChecked(true);
-            }
-            else{
-                activityEpisodioBinding.assistidoCb.setChecked(false);
-            }
+            Log.i("tag", episodio.toString());
+            if(episodio.getAssistido().equals("true")) activityEpisodioBinding.assistidoCb.setChecked(true);
 
             if (posicao == -1){
                 for (int i=0; i<activityEpisodioBinding.getRoot().getChildCount(); i++){
