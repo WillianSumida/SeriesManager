@@ -1,5 +1,6 @@
 package com.example.seriesmanager.adapter.episodio
 
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView

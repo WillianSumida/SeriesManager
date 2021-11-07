@@ -62,12 +62,11 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
         super.onCreate(savedInstanceState)
         setContentView(activityMainEpisodioBinding.root)
 
-        Log.i("tag", episodioslist.size.toString())
+
 
         //associar adapter e layoutManager ao recyclerView
         activityMainEpisodioBinding.episodiosRv.adapter = episodioAdapter
         activityMainEpisodioBinding.episodiosRv.layoutManager = episodiosLayoutManager
-
 
         episodioActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 resultado->
