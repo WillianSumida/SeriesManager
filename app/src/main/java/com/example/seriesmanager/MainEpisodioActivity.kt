@@ -74,6 +74,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
+                    Log.i("tag", episodioController.listOneEpisodio(this).toString())
                     if  (episodioController.listOneEpisodio(this).numeroEpisodio.equals("")) {
                         episodioController.insertEpisodio(this)
                         episodioslist.add(this)
@@ -135,7 +136,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
                 true
             }
-            R.id.removerTemporadaMi -> {
+            R.id.removerEpisodioMi -> {
                 //remover serie
                 episodioController.deleteEpisodio(episodioslist[posicao])
                 episodioslist.removeAt(posicao)

@@ -14,5 +14,5 @@ class TemporadaController (mainTemporadaActivity: MainTemporadaActivity){
     fun listOneTemporada(temporada: Temporada) = temporadaDao.listOneTemporada(temporada);
     fun listAllTemporada(nomeSerie: String) = temporadaDao.litsAllTemporada(nomeSerie);
     fun updateTemporada(temporada: Temporada) = temporadaDao.updateTemporada(temporada);
-    fun deleteTemporada(numeroTemporada: String) = temporadaDao.deleteTemporada(numeroTemporada);
+    fun deleteTemporada(numeroTemporada: String, nomeSerie: String) = temporadaDao.deleteTemporada(numeroTemporada, nomeSerie);
 }

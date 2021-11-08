@@ -52,7 +52,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
             TABELA_EPISODIO,
             null, //tabela
             "${COLUNA_NOME_SERIE} = ? AND $COLUNA_TEMPORADA = ? AND ${COLUNA_NUMERO_EPISODIO} = ?", //where,
-            arrayOf(episodio.nomeEpisodio, episodio.temporada, episodio.numeroEpisodio),
+            arrayOf(episodio.nomeSerie, episodio.temporada, episodio.numeroEpisodio),
             null,
             null,
             null,

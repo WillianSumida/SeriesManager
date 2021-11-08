@@ -107,8 +107,10 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
         return temporadasDb.update(TABELA_TEMPORADA, temporadaCv, "${COLUNA_NUMERO_TEMPORADA} = ?", arrayOf(temporada.numeroTemporada))
     }
 
-    override fun deleteTemporada(numeroTemporada: String): Int {
-        return temporadasDb.delete(TABELA_TEMPORADA, "${COLUNA_NUMERO_TEMPORADA} = ?", arrayOf(numeroTemporada))
+    override fun deleteTemporada(numeroTemporada: String, nomeSerie: String): Int {
+        return temporadasDb.delete(TABELA_TEMPORADA,
+            "${COLUNA_NUMERO_TEMPORADA} = ? AND ${COLUNA_NOME_SERIE} = ?",
+            arrayOf(numeroTemporada, nomeSerie))
     }
 
     private fun convertTemporadaContentValues(temporada: Temporada): ContentValues = ContentValues().also{

@@ -7,5 +7,5 @@ interface TemporadaDao {
     fun listOneTemporada(temporada: Temporada): Temporada
     fun litsAllTemporada(nomeSerie: String): MutableList<Temporada>
     fun updateTemporada(temporada: Temporada): Int
-    fun deleteTemporada(numeroTemporada: String): Int
+    fun deleteTemporada(numeroTemporada: String, nomeSerie: String): Int
 }
