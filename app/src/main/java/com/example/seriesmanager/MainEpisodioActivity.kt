@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,9 +74,15 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
-                    episodioController.insertEpisodio(this)
-                    episodioslist.add(this)
-                    episodioAdapter.notifyDataSetChanged()
+                    if  (episodioController.listOneEpisodio(this).numeroEpisodio.equals("")) {
+                        episodioController.insertEpisodio(this)
+                        episodioslist.add(this)
+                        episodioAdapter.notifyDataSetChanged()
+                        Toast.makeText(applicationContext, "Episodio cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(applicationContext, "Episodio ja existente!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

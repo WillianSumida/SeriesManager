@@ -3,6 +3,7 @@ package com.example.seriesmanager
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -61,9 +62,15 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Serie>(EXTRA_SERIE)?.apply {
-                    serieController.insertSerie(this)
-                    seriesList.add(this)
-                    serieAdapter.notifyDataSetChanged()
+                    if  (serieController.listOneSerie(this.nome).nome.equals("")) {
+                        serieController.insertSerie(this)
+                        seriesList.add(this)
+                        serieAdapter.notifyDataSetChanged()
+                        Toast.makeText(applicationContext, "Serie cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(applicationContext, "Serie ja existente!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

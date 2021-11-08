@@ -15,7 +15,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
         private val COLUNA_NUMERO_EPISODIO = "numeroEpisodio"
         private val COLUNA_NOME_EPISODIO = "nomeEpisodio"
         private val COLUNA_DURACAO = "duracao"
-        private val COLUNA_ASSISTIDO = "assitido"
+        private val COLUNA_ASSISTIDO = "assistido"
         private val COLUNA_NOME_SERIE = "nomeSerie"
         private val COLUNA_TEMPORADA = "temporada"
 
@@ -26,7 +26,8 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
                 "$COLUNA_DURACAO TEXT NOT NULL, " +
                 "$COLUNA_ASSISTIDO TEXT NOT NULL, " +
                 "$COLUNA_NOME_SERIE TEXT NOT NULL, " +
-                "$COLUNA_TEMPORADA TEXT NOT NULL);"
+                "$COLUNA_TEMPORADA TEXT NOT NULL, " +
+                "PRIMARY KEY (${COLUNA_NUMERO_EPISODIO}, ${COLUNA_TEMPORADA}, ${COLUNA_NOME_SERIE}));"
     }
 
     //Referecia para o db
@@ -45,13 +46,13 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
         return episodiosDb.insert(TABELA_EPISODIO, null, episodioCv)
     }
 
-    override fun listOneEpisodio(nomeEpisodio: String , ): Episodio {
+    override fun listOneEpisodio(episodio: Episodio): Episodio{
         val episodioCursor = episodiosDb.query(
             true,
             TABELA_EPISODIO,
             null, //tabela
-            "${COLUNA_NOME_SERIE} = ? AND $COLUNA_TEMPORADA = ?", //where,
-            null,
+            "${COLUNA_NOME_SERIE} = ? AND $COLUNA_TEMPORADA = ? AND ${COLUNA_NUMERO_EPISODIO} = ?", //where,
+            arrayOf(episodio.nomeEpisodio, episodio.temporada, episodio.numeroEpisodio),
             null,
             null,
             null,

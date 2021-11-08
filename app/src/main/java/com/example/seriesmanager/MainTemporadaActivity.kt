@@ -3,7 +3,9 @@ package com.example.seriesmanager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,9 +71,15 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Temporada>(MainTemporadaActivity.EXTRA_TEMPORADA)?.apply {
-                    temporadaController.insertTemporada(this)
-                    temporadasList.add(this)
-                    temporadaAdapter.notifyDataSetChanged()
+                    if  (temporadaController.listOneTemporada(this).numeroTemporada.equals("")) {
+                        temporadaController.insertTemporada(this)
+                        temporadasList.add(this)
+                        temporadaAdapter.notifyDataSetChanged()
+                        Toast.makeText(applicationContext, "Temporada cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(applicationContext, "Temporada ja existente!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

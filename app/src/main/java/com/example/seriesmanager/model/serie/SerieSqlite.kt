@@ -19,10 +19,11 @@ class SerieSqlite(contexto: Context): SerieDao {
 
 
         private val CRIAR_TABELA_SERIE_STMT = "CREATE TABLE IF NOT EXISTS $TABELA_SERIE (" +
-                "$COLUNA_NOME TEXT NOT NULL PRIMARY KEY, " +
+                "$COLUNA_NOME TEXT NOT NULL, " +
                 "$COLUNA_ANO_LANCAMENTO TEXT NOT NULL, " +
                 "$COLUNA_EMISSORA TEXT NOT NULL, " +
-                "$COLUNA_GENERO TEXT NOT NULL);"
+                "$COLUNA_GENERO TEXT NOT NULL, " +
+                "PRIMARY KEY (${COLUNA_NOME}))"
     }
 
     //Referecia para o db
@@ -48,7 +49,7 @@ class SerieSqlite(contexto: Context): SerieDao {
             TABELA_SERIE,
             null, //tabela
             "$COLUNA_NOME = ?", //where,
-            null, //valores do where
+            arrayOf(nome), //valores do where
             null,
             null,
             null,

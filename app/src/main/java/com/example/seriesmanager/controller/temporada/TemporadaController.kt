@@ -11,7 +11,7 @@ class TemporadaController (mainTemporadaActivity: MainTemporadaActivity){
     private val temporadaDao: TemporadaDao = TemporadaSqlite(mainTemporadaActivity)
 
     fun insertTemporada(temporada: Temporada) = temporadaDao.createTemporada(temporada);
-    fun listOneTemporada(numeroTemporada: String) = temporadaDao.listOneTemporada(numeroTemporada);
+    fun listOneTemporada(temporada: Temporada) = temporadaDao.listOneTemporada(temporada);
     fun listAllTemporada(nomeSerie: String) = temporadaDao.litsAllTemporada(nomeSerie);
     fun updateTemporada(temporada: Temporada) = temporadaDao.updateTemporada(temporada);
     fun deleteTemporada(numeroTemporada: String) = temporadaDao.deleteTemporada(numeroTemporada);

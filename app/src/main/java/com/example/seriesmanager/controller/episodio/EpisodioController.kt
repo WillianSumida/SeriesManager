@@ -10,7 +10,7 @@ class EpisodioController (mainEpisodioActivity: MainEpisodioActivity){
     private val episodioDao: EpisodioDao = EpisodioSqlite(mainEpisodioActivity)
 
     fun insertEpisodio(episodio: Episodio) = episodioDao.createEpisodio(episodio)
-    fun listOneEpisodio(nomeEpisodio: String) = episodioDao.listOneEpisodio(nomeEpisodio)
+    fun listOneEpisodio(episodio: Episodio) = episodioDao.listOneEpisodio(episodio)
     fun listAllEpisodio(nomeSerie: String, temporada: String) = episodioDao.listAllEpisodio(nomeSerie, temporada)
     fun updateEpisodio(episodio: Episodio) = episodioDao.updateEpisodio(episodio)
     fun deleteEpisodio(episodio: Episodio) = episodioDao.deleteEpisodio(episodio)

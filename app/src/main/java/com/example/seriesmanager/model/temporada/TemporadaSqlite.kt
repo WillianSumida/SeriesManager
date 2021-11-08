@@ -24,7 +24,8 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
                 "$COLUNA_NUMERO_TEMPORADA TEXT NOT NULL, " +
                 "$COLUNA_ANO_LANCAMENTO TEXT NOT NULL, " +
                 "$COLUNA_QTD_EPISODES TEXT NOT NULL, " +
-                "$COLUNA_NOME_SERIE TEXT NOT NULL);"
+                "$COLUNA_NOME_SERIE TEXT NOT NULL," +
+                "PRIMARY KEY (${COLUNA_NUMERO_TEMPORADA}, ${COLUNA_NOME_SERIE}))"
     }
     //Referecia para o db
     private val temporadasDb: SQLiteDatabase
@@ -42,13 +43,13 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
         return temporadasDb.insert(TABELA_TEMPORADA, null, temporadaCv)
     }
 
-    override fun listOneTemporada(numeroTemporada: String): Temporada {
+    override fun listOneTemporada(temporada: Temporada): Temporada {
         val temporadaCursor = temporadasDb.query(
             true,
             TABELA_TEMPORADA,
             null, //tabela
-            "${COLUNA_NUMERO_TEMPORADA} = ?", //where,
-            null, //valores do where
+            "${COLUNA_NUMERO_TEMPORADA} = ? AND ${COLUNA_NOME_SERIE} = ?", //where,
+            arrayOf(temporada.numeroTemporada, temporada.nomeSerie), //valores do where
             null,
             null,
             null,
