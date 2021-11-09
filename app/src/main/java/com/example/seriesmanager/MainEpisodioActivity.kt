@@ -63,7 +63,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
         super.onCreate(savedInstanceState)
         setContentView(activityMainEpisodioBinding.root)
 
-
+        setTitle("Episodios")
 
         //associar adapter e layoutManager ao recyclerView
         activityMainEpisodioBinding.episodiosRv.adapter = episodioAdapter

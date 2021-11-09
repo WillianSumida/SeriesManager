@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.seriesmanager.OnSerieClickListener
 import com.example.seriesmanager.R
 import com.example.seriesmanager.databinding.LayoutSerieBinding
+
 import com.example.seriesmanager.model.serie.Serie
 
 class SerieRvAdapter (
@@ -22,6 +23,7 @@ class SerieRvAdapter (
         val nomeTv: TextView = layoutSerieBinding.nomeTv
         val emissoraTv: TextView = layoutSerieBinding.emissoraTv
         val generoTv: TextView =  layoutSerieBinding.generoTv
+        val anoLancamentoTv: TextView =  layoutSerieBinding.anoLancamentoTv
 
         init{
             itemView.setOnCreateContextMenuListener(this)
@@ -52,9 +54,11 @@ class SerieRvAdapter (
 
         //atualizar valor do viewHolder
         with(holder) {
-            nomeTv.text = serie.nome
-            emissoraTv.text = serie.emissora
-            generoTv.text = serie.genero
+            nomeTv.text = "Nome: "+serie.nome
+            emissoraTv.text = "Emissora: "+serie.emissora
+            generoTv.text = "Genero: "+serie.genero
+            anoLancamentoTv.text = "Ano: " + serie.anoDeLancamento
+
             itemView.setOnClickListener {
                 eventClickSerie.onSerieClick(position)
             }

@@ -6,7 +6,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="?android:attr/selectableItemBackground"
-    >
+    android:layout_margin="5dp">
 
     <TextView
         android:id="@+id/numeroEpisodioTv"
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Nome episodio"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/numeroEpisodioTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/nomeSerieTv" />
@@ -33,6 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Duracao"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/nomeSerieTv"
         app:layout_constraintTop_toBottomOf="@+id/nomeEpisodioTv" />
@@ -42,6 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Nome serie"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@id/duracaoTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomeEpisodioTv" />

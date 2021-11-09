@@ -53,10 +53,10 @@ class TemporadaRvAdapter (
 
         //atualizar valor do viewHolder
         with(holder) {
-            numeroTemporadaTv.text = temporada.numeroTemporada
-            anoLancamentoTv.text = temporada.anoDeLancamento
-            qtdEpisodesTv.text = temporada.qtdEpisodes
-            nomeSerieTv.text = temporada.nomeSerie
+            numeroTemporadaTv.text = "Temp: "+ temporada.numeroTemporada
+            anoLancamentoTv.text = "Ano: "+ temporada.anoDeLancamento
+            qtdEpisodesTv.text = "Eps: "+ temporada.qtdEpisodes
+            nomeSerieTv.text = "Serie: "+ temporada.nomeSerie
 
             itemView.setOnClickListener {
                 eventClickTemporada.onTemporadaClick(position)

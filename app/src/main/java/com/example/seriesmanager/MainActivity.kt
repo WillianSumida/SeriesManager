@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
 
+        setTitle("Series")
+
         //associar adapter e layoutManager ao recyclerView
         activityMainBinding.seriesRv.adapter = serieAdapter
         activityMainBinding.seriesRv.layoutManager = seriesLayoutManager

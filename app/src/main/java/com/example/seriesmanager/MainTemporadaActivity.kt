@@ -61,6 +61,8 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
         super.onCreate(savedInstanceState)
         setContentView(activityMainTemporadaBinding.root)
 
+        setTitle("Temporadas")
+
         //associar adapter e layoutManager ao recyclerView
         activityMainTemporadaBinding.temporadasRv.adapter = temporadaAdapter
         activityMainTemporadaBinding.temporadasRv.layoutManager = temporadasLayoutManager

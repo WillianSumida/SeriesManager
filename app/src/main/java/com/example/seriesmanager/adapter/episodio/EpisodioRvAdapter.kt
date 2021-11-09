@@ -56,10 +56,10 @@ class EpisodioRvAdapter(
 
         //atualizar valor do viewHolder
         with(holder) {
-            numeroEpisodioTv.text = episodio.numeroEpisodio
-            nomeEpisodioTv.text = episodio.nomeEpisodio
-            duracaoTv.text = episodio.duracao
-            nomeSerieTv.text = episodio.nomeSerie
+            numeroEpisodioTv.text = "Ep: "+ episodio.numeroEpisodio
+            nomeEpisodioTv.text = "Nome: "+ episodio.nomeEpisodio
+            duracaoTv.text = "Duracao: "+ episodio.duracao + "min"
+            nomeSerieTv.text = episodio.nomeSerie + " " + episodio.temporada + " temp"
 
             itemView.setOnClickListener {
                 eventClickEpisodio.onEpisodioClick(position)
