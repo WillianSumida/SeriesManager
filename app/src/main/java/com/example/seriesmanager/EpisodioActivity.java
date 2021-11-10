@@ -19,12 +19,15 @@ public class EpisodioActivity extends AppCompatActivity {
     private Serie serie;
     private Temporada temporada;
     private Episodio episodio;
+    private int numeroEpisodio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityEpisodioBinding = ActivityEpisodioBinding.inflate(getLayoutInflater());
         setContentView(activityEpisodioBinding.getRoot());
+
+        numeroEpisodio = (getIntent().getIntExtra(MainEpisodioActivity.EXTRA_NUMERO_EP, 0) + 1);
 
         setTitle("Episodio");
 
@@ -37,13 +40,16 @@ public class EpisodioActivity extends AppCompatActivity {
 
             activityEpisodioBinding.temporadaEt.setText(temporada.getNumeroTemporada());
             activityEpisodioBinding.temporadaEt.setEnabled(false);
+
+            activityEpisodioBinding.numeroEpisodioEt.setText(String.valueOf(numeroEpisodio));
+            activityEpisodioBinding.numeroEpisodioEt.setEnabled(false);
         }
 
         activityEpisodioBinding.salvarEpisodioBt.setOnClickListener(
 
                 (View view ) -> {
                     episodio = new Episodio(
-                            activityEpisodioBinding.numeroEpisodioEt.getText().toString(),
+                            String.valueOf(numeroEpisodio),
                             activityEpisodioBinding.nomeEpisodioEt.getText().toString(),
                             activityEpisodioBinding.duracaoEt.getText().toString(),
                             activityEpisodioBinding.assistidoCb.isChecked() ? "true" : "false",

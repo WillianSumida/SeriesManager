@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.seriesmanager.databinding.ActivitySerieBinding;
@@ -17,12 +18,15 @@ public class TemporadaActivity extends AppCompatActivity {
     private int posicao = -1;
     private Serie serie;
     private Temporada temporada;
+    private int numeroTemporada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityTemporadaBinding = ActivityTemporadaBinding.inflate(getLayoutInflater());
         setContentView(activityTemporadaBinding.getRoot());
+
+        numeroTemporada = (getIntent().getIntExtra(MainTemporadaActivity.EXTRA_QNTD_TEMP, 0) + 1);
 
         setTitle("Temporada");
 
@@ -31,6 +35,9 @@ public class TemporadaActivity extends AppCompatActivity {
         if (serie != null){
             activityTemporadaBinding.nomeSerieEt.setText(serie.getNome());
             activityTemporadaBinding.nomeSerieEt.setEnabled(false);
+
+            activityTemporadaBinding.numeroTemporadaEt.setText(String.valueOf(numeroTemporada));
+            activityTemporadaBinding.numeroTemporadaEt.setEnabled(false);
         }
 
 
@@ -38,7 +45,7 @@ public class TemporadaActivity extends AppCompatActivity {
         activityTemporadaBinding.salvarTemporadaBt.setOnClickListener(
                 (View view ) -> {
                     temporada = new Temporada(
-                            activityTemporadaBinding.numeroTemporadaEt.getText().toString(),
+                            String.valueOf(numeroTemporada),
                             activityTemporadaBinding.anoLancamentoEt.getText().toString(),
                             activityTemporadaBinding.qtdeEpisodesEt.getText().toString(),
                             activityTemporadaBinding.nomeSerieEt.getText().toString()

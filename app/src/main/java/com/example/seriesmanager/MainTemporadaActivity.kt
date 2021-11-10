@@ -25,6 +25,7 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
         const val EXTRA_SERIE = "EXTRA_SERIE"
         const val EXTRA_TEMPORADA = "EXTRA_TEMPORADA"
         const val EXTRA_POSICAO = "EXTRA_POSICAO"
+        const val EXTRA_QNTD_TEMP = "EXTRA_QNTD_TEMP"
     }
 
     private val activityMainTemporadaBinding: ActivityMainTemporadaBinding by lazy {
@@ -101,10 +102,13 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
             }
         }
 
+        Log.i("tag", "aqui olhar: " + temporadasList.size)
+
         activityMainTemporadaBinding.adicionarTemporadaFab.setOnClickListener{
             serie = intent.getParcelableExtra(MainActivity.EXTRA_SERIE)!!
 
-            temporadaActivityResultLauncher.launch(Intent(this, TemporadaActivity::class.java).putExtra(MainActivity.EXTRA_SERIE, serie))
+            temporadaActivityResultLauncher.launch(Intent(this, TemporadaActivity::class.java).
+                putExtra(MainActivity.EXTRA_SERIE, serie).putExtra(EXTRA_QNTD_TEMP, temporadasList.size))
         }
     }
 

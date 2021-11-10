@@ -23,6 +23,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
         const val EXTRA_TEMPORADA = "EXTRA_TEMPORADA"
         const val EXTRA_EPISODIO = "EXTRA_EPISODIO"
         const val EXTRA_POSICAO = "EXTRA_POSICAO"
+        const val EXTRA_NUMERO_EP = "EXTRA_NUMERO_EP"
     }
 
     private val activityMainEpisodioBinding: ActivityMainEpisodioBinding by lazy {
@@ -107,7 +108,9 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             temporada = intent.getParcelableExtra(MainTemporadaActivity.EXTRA_TEMPORADA)!!
 
             episodioActivityResultLauncher.launch(Intent(this,
-                EpisodioActivity::class.java).putExtra(MainTemporadaActivity.EXTRA_SERIE, serie).putExtra(MainTemporadaActivity.EXTRA_TEMPORADA, temporada))
+                EpisodioActivity::class.java).putExtra(MainTemporadaActivity.EXTRA_SERIE, serie).
+                putExtra(MainTemporadaActivity.EXTRA_TEMPORADA, temporada).putExtra(
+                EXTRA_NUMERO_EP, episodioslist.size))
         }
     }
 
