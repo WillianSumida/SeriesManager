@@ -74,8 +74,8 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Temporada>(MainTemporadaActivity.EXTRA_TEMPORADA)?.apply {
                     if  (temporadaController.insertTemporada(this).compareTo(-1) != 0) {
-
                         temporadasList.add(this)
+                        temporadasList.sortBy { it.numeroTemporada }
                         temporadaAdapter.notifyDataSetChanged()
                         Toast.makeText(applicationContext, "Temporada cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
                     }

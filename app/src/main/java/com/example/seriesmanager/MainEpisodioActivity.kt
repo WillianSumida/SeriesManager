@@ -76,11 +76,12 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
                 resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
                     if  (episodioController.insertEpisodio(this).compareTo(-1) != 0) {
                         episodioslist.add(this)
+                        episodioslist.sortBy { it.numeroEpisodio }
                         episodioAdapter.notifyDataSetChanged()
-                        Toast.makeText(applicationContext, "Episodio cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Episodio cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        Toast.makeText(applicationContext, "Falha ao cadastrar o episodio!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Falha ao cadastrar episodio!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
