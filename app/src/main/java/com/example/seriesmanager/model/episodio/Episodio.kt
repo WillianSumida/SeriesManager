@@ -10,5 +10,5 @@ data class Episodio(
     val duracao: String = "",
     val assistido: String = "",
     val nomeSerie: String = "",
-    val temporada: String = ""
+    val temporadaNumero: String = ""
 ): Parcelable

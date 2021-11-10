@@ -74,15 +74,13 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Episodio>(MainEpisodioActivity.EXTRA_EPISODIO)?.apply {
-                    Log.i("tag", episodioController.listOneEpisodio(this).toString())
-                    if  (episodioController.listOneEpisodio(this).numeroEpisodio.equals("")) {
-                        episodioController.insertEpisodio(this)
+                    if  (episodioController.insertEpisodio(this).compareTo(-1) != 0) {
                         episodioslist.add(this)
                         episodioAdapter.notifyDataSetChanged()
                         Toast.makeText(applicationContext, "Episodio cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        Toast.makeText(applicationContext, "Episodio ja existente!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Falha ao cadastrar o episodio!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

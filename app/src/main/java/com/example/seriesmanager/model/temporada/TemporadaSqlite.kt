@@ -25,12 +25,15 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
                 "$COLUNA_ANO_LANCAMENTO TEXT NOT NULL, " +
                 "$COLUNA_QTD_EPISODES TEXT NOT NULL, " +
                 "$COLUNA_NOME_SERIE TEXT NOT NULL," +
+                "FOREIGN KEY(${COLUNA_NOME_SERIE}) REFERENCES serie(nome) ON DELETE CASCADE, " +
                 "PRIMARY KEY (${COLUNA_NUMERO_TEMPORADA}, ${COLUNA_NOME_SERIE}))"
     }
+
     //Referecia para o db
     private val temporadasDb: SQLiteDatabase
     init{
         temporadasDb = contexto.openOrCreateDatabase(BD_SERIES_MANAGER, Context.MODE_PRIVATE, null)
+        temporadasDb.setForeignKeyConstraintsEnabled(true)
         try {
             temporadasDb.execSQL(CRIAR_TABELA_TEMPORADA_STMT)
         } catch (se: android.database.SQLException){
@@ -40,6 +43,7 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
 
     override fun createTemporada(temporada: Temporada): Long {
         val temporadaCv = convertTemporadaContentValues(temporada)
+
         return temporadasDb.insert(TABELA_TEMPORADA, null, temporadaCv)
     }
 
@@ -80,7 +84,7 @@ class TemporadaSqlite(contexto: Context): TemporadaDao {
             arrayOf(nomeSerie), //valores do where
             null,
             null,
-            null,
+            "${COLUNA_NUMERO_TEMPORADA} ASC",
             null
         )
 

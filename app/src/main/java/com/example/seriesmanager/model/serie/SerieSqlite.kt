@@ -31,6 +31,7 @@ class SerieSqlite(contexto: Context): SerieDao {
 
     init {
         seriesDb = contexto.openOrCreateDatabase(BD_SERIES_MANAGER, Context.MODE_PRIVATE, null)
+        seriesDb.setForeignKeyConstraintsEnabled(true)
         try {
             seriesDb.execSQL(CRIAR_TABELA_SERIE_STMT)
         } catch (se: android.database.SQLException) {

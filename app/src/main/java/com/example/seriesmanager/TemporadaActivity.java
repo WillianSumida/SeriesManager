@@ -24,6 +24,8 @@ public class TemporadaActivity extends AppCompatActivity {
         activityTemporadaBinding = ActivityTemporadaBinding.inflate(getLayoutInflater());
         setContentView(activityTemporadaBinding.getRoot());
 
+        setTitle("Temporada");
+
         serie = getIntent().getParcelableExtra(MainTemporadaActivity.EXTRA_SERIE);
 
         if (serie != null){

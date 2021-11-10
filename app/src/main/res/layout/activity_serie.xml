@@ -40,12 +40,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/anoLancamentoEt" />
 
-    <EditText
-        android:id="@+id/generoEt"
+    <Spinner
+        android:id="@+id/generoSp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Genero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,5 +58,5 @@
         android:text="Salvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generoEt" />
+        app:layout_constraintTop_toBottomOf="@+id/generoSp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
         private val COLUNA_DURACAO = "duracao"
         private val COLUNA_ASSISTIDO = "assistido"
         private val COLUNA_NOME_SERIE = "nomeSerie"
-        private val COLUNA_TEMPORADA = "temporada"
+        private val COLUNA_TEMPORADA = "temporadaNumero"
 
 
         private val CRIAR_TABELA_EPISODIO_STMT = "CREATE TABLE IF NOT EXISTS $TABELA_EPISODIO(" +
@@ -27,7 +27,8 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
                 "$COLUNA_ASSISTIDO TEXT NOT NULL, " +
                 "$COLUNA_NOME_SERIE TEXT NOT NULL, " +
                 "$COLUNA_TEMPORADA TEXT NOT NULL, " +
-                "PRIMARY KEY (${COLUNA_NUMERO_EPISODIO}, ${COLUNA_TEMPORADA}, ${COLUNA_NOME_SERIE}));"
+                "FOREIGN KEY(${COLUNA_NOME_SERIE}, ${COLUNA_TEMPORADA}) REFERENCES temporada(nome_Serie,numero_temporada) ON DELETE CASCADE, " +
+                "PRIMARY KEY (${COLUNA_NUMERO_EPISODIO}, ${COLUNA_NOME_SERIE}, ${COLUNA_TEMPORADA}));"
     }
 
     //Referecia para o db
@@ -36,6 +37,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
         episodiosDb = contexto.openOrCreateDatabase(EpisodioSqlite.BD_SERIES_MANAGER, Context.MODE_PRIVATE, null)
         try {
             episodiosDb.execSQL(EpisodioSqlite.CRIAR_TABELA_EPISODIO_STMT)
+            episodiosDb.setForeignKeyConstraintsEnabled(true)
         } catch (se: android.database.SQLException){
             Log.e(contexto.getString(R.string.app_name), se.toString())
         }
@@ -52,7 +54,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
             TABELA_EPISODIO,
             null, //tabela
             "${COLUNA_NOME_SERIE} = ? AND $COLUNA_TEMPORADA = ? AND ${COLUNA_NUMERO_EPISODIO} = ?", //where,
-            arrayOf(episodio.nomeSerie, episodio.temporada, episodio.numeroEpisodio),
+            arrayOf(episodio.nomeSerie, episodio.temporadaNumero, episodio.numeroEpisodio),
             null,
             null,
             null,
@@ -85,7 +87,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
             arrayOf(nomeSerie, temporada), //valores do where
             null,
             null,
-            null,
+            "${COLUNA_NUMERO_EPISODIO} ASC",
             null
         )
 
@@ -113,13 +115,13 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
         val episodioCv = convertEpisodioContentValues(episodio)
         return episodiosDb.update(TABELA_EPISODIO, episodioCv,
             "${COLUNA_NUMERO_EPISODIO} = ? AND ${COLUNA_NOME_SERIE} = ? AND ${COLUNA_TEMPORADA} = ?",
-            arrayOf(episodio.numeroEpisodio, episodio.nomeSerie, episodio.temporada))
+            arrayOf(episodio.numeroEpisodio, episodio.nomeSerie, episodio.temporadaNumero))
     }
 
     override fun deleteEpisodio(episodio: Episodio): Int {
         return episodiosDb.delete(TABELA_EPISODIO,
             "${COLUNA_NUMERO_EPISODIO} = ? AND ${COLUNA_NOME_SERIE} = ? AND ${COLUNA_TEMPORADA} = ?",
-            arrayOf(episodio.numeroEpisodio, episodio.nomeSerie, episodio.temporada))
+            arrayOf(episodio.numeroEpisodio, episodio.nomeSerie, episodio.temporadaNumero))
     }
 
     private fun convertEpisodioContentValues(episodio: Episodio): ContentValues = ContentValues().also{
@@ -129,7 +131,7 @@ class EpisodioSqlite(contexto: Context): EpisodioDao {
             put(COLUNA_DURACAO, episodio.duracao)
             put(COLUNA_ASSISTIDO, episodio.assistido)
             put(COLUNA_NOME_SERIE, episodio.nomeSerie)
-            put(COLUNA_TEMPORADA, episodio.temporada)
+            put(COLUNA_TEMPORADA, episodio.temporadaNumero)
         }
     }
 }

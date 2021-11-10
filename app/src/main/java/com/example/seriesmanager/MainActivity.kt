@@ -64,14 +64,13 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 resultado.data?.getParcelableExtra<Serie>(EXTRA_SERIE)?.apply {
-                    if  (serieController.listOneSerie(this.nome).nome.equals("")) {
-                        serieController.insertSerie(this)
+                    if  (serieController.insertSerie(this).compareTo(-1) != 0) {
                         seriesList.add(this)
                         serieAdapter.notifyDataSetChanged()
                         Toast.makeText(applicationContext, "Serie cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        Toast.makeText(applicationContext, "Serie ja existente!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Falha ao cadastrar serie!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

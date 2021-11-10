@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SeriesManager</string>
+    <string-array name="generos">
+        <item>Comedia</item>
+        <item>Acao</item>
+        <item>Suspense</item>
+        <item>Terror</item>
+        <item>Romance</item>
+    </string-array>
 </resources>

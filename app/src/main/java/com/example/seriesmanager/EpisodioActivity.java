@@ -26,6 +26,8 @@ public class EpisodioActivity extends AppCompatActivity {
         activityEpisodioBinding = ActivityEpisodioBinding.inflate(getLayoutInflater());
         setContentView(activityEpisodioBinding.getRoot());
 
+        setTitle("Episodio");
+
         serie = getIntent().getParcelableExtra(MainEpisodioActivity.EXTRA_SERIE);
         temporada = getIntent().getParcelableExtra(MainEpisodioActivity.EXTRA_TEMPORADA);
 
@@ -47,7 +49,6 @@ public class EpisodioActivity extends AppCompatActivity {
                             activityEpisodioBinding.assistidoCb.isChecked() ? "true" : "false",
                             activityEpisodioBinding.nomeSerieEt.getText().toString(),
                             activityEpisodioBinding.temporadaEt.getText().toString()
-
                     );
 
                     Intent resultIntent = new Intent();
@@ -74,7 +75,7 @@ public class EpisodioActivity extends AppCompatActivity {
             activityEpisodioBinding.nomeSerieEt.setEnabled(false);
             activityEpisodioBinding.nomeSerieEt.setText(episodio.getNomeSerie());
             activityEpisodioBinding.temporadaEt.setEnabled(false);
-            activityEpisodioBinding.temporadaEt.setText(episodio.getTemporada());
+            activityEpisodioBinding.temporadaEt.setText(episodio.getTemporadaNumero());
 
             Log.i("tag", episodio.toString());
             if(episodio.getAssistido().equals("true")) activityEpisodioBinding.assistidoCb.setChecked(true);

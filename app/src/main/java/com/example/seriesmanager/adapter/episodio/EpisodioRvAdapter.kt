@@ -59,7 +59,7 @@ class EpisodioRvAdapter(
             numeroEpisodioTv.text = "Ep: "+ episodio.numeroEpisodio
             nomeEpisodioTv.text = "Nome: "+ episodio.nomeEpisodio
             duracaoTv.text = "Duracao: "+ episodio.duracao + "min"
-            nomeSerieTv.text = episodio.nomeSerie + " " + episodio.temporada + " temp"
+            nomeSerieTv.text = episodio.nomeSerie + " " + episodio.temporadaNumero + " temp"
 
             itemView.setOnClickListener {
                 eventClickEpisodio.onEpisodioClick(position)
