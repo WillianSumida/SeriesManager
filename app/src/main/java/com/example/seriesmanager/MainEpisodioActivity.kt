@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -63,7 +64,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainEpisodioBinding.root)
-
+        episodioAdapter.notifyDataSetChanged()
         setTitle("Episodios")
 
         //associar adapter e layoutManager ao recyclerView
@@ -156,5 +157,19 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
         val consultarEpisodioIntent = Intent(this, EpisodioActivity::class.java)
         consultarEpisodioIntent.putExtra(MainEpisodioActivity.EXTRA_EPISODIO, episodio)
         startActivity(consultarEpisodioIntent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        episodioAdapter.notifyDataSetChanged()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.atualizarMi -> {
+            episodioAdapter.notifyDataSetChanged()
+            true
+        }
+        else -> {false}
     }
 }

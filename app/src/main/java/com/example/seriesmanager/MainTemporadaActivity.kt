@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -61,13 +62,11 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainTemporadaBinding.root)
-
         setTitle("Temporadas")
 
         //associar adapter e layoutManager ao recyclerView
         activityMainTemporadaBinding.temporadasRv.adapter = temporadaAdapter
         activityMainTemporadaBinding.temporadasRv.layoutManager = temporadasLayoutManager
-
 
         temporadaActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 resultado->
@@ -155,5 +154,19 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
         consultarEpisodioTemporada.putExtra(EXTRA_SERIE, serie)
         consultarEpisodioTemporada.putExtra(EXTRA_TEMPORADA, temporada)
         startActivity(consultarEpisodioTemporada)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        temporadaAdapter.notifyDataSetChanged()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.atualizarMi -> {
+            temporadaAdapter.notifyDataSetChanged()
+            true
+        }
+        else -> {false}
     }
 }

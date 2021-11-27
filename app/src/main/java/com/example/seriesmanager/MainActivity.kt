@@ -2,6 +2,8 @@ package com.example.seriesmanager
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -139,6 +141,18 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
         val consultarSerieTemporadaIntent = Intent(this, MainTemporadaActivity::class.java)
         consultarSerieTemporadaIntent.putExtra(EXTRA_SERIE, serie)
         startActivity(consultarSerieTemporadaIntent)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.atualizarMi -> {
+            serieAdapter.notifyDataSetChanged()
+            true
+        }
+        else -> {false}
     }
 }
