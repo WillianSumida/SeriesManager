@@ -53,4 +53,7 @@ dependencies {
 
     //bibliotecas realtime database do firebase
     implementation 'com.google.firebase:firebase-database-ktx'
+
+    //bibliotecas autenticacao firebase
+    implementation 'com.google.firebase:firebase-auth-ktx'
 }

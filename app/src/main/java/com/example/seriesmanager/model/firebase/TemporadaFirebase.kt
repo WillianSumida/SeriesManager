@@ -87,6 +87,7 @@ class TemporadaFirebase: TemporadaDao {
 
     override fun updateTemporada(temporada: Temporada): Int {
         createOrUpdate(temporada)
+        Log.i("aaa", temporada.numeroTemporada.toString())
         return 1
     }
 

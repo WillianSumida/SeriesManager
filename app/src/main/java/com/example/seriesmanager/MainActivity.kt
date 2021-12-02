@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
-
         setTitle("Series")
 
         //associar adapter e layoutManager ao recyclerView
@@ -145,6 +144,7 @@ class MainActivity : AppCompatActivity(), OnSerieClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        serieAdapter.notifyDataSetChanged()
         return true
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -63,7 +64,6 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
         super.onCreate(savedInstanceState)
         setContentView(activityMainTemporadaBinding.root)
         setTitle("Temporadas")
-
         //associar adapter e layoutManager ao recyclerView
         activityMainTemporadaBinding.temporadasRv.adapter = temporadaAdapter
         activityMainTemporadaBinding.temporadasRv.layoutManager = temporadasLayoutManager
@@ -91,6 +91,7 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
 
             if (resultado.resultCode == RESULT_OK) {
                 val posicao = resultado.data?.getIntExtra(EXTRA_POSICAO, -1)
+                Log.i("aaa", "aqui olhar: " + posicao)
                 resultado.data?.getParcelableExtra<Temporada>(EXTRA_TEMPORADA)?.apply {
                     if(posicao != null && posicao != -1) {
                         temporadaController.updateTemporada(this)
@@ -101,13 +102,11 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
             }
         }
 
-        Log.i("tag", "aqui olhar: " + temporadasList.size)
-
         activityMainTemporadaBinding.adicionarTemporadaFab.setOnClickListener{
             serie = intent.getParcelableExtra(MainActivity.EXTRA_SERIE)!!
 
             temporadaActivityResultLauncher.launch(Intent(this, TemporadaActivity::class.java).
-                putExtra(MainActivity.EXTRA_SERIE, serie).putExtra(EXTRA_QNTD_TEMP, temporadasList.size))
+                putExtra(MainActivity.EXTRA_SERIE, serie).putExtra(EXTRA_POSICAO, temporadasList.size))
         }
     }
 
@@ -169,4 +168,5 @@ class MainTemporadaActivity : AppCompatActivity(), OnTemporadaClickListener {
         }
         else -> {false}
     }
+
 }

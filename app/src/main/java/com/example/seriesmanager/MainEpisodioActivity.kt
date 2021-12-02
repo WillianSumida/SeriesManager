@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -63,10 +64,9 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(activityMainEpisodioBinding.root)
         episodioAdapter.notifyDataSetChanged()
+        setContentView(activityMainEpisodioBinding.root)
         setTitle("Episodios")
-
         //associar adapter e layoutManager ao recyclerView
         activityMainEpisodioBinding.episodiosRv.adapter = episodioAdapter
         activityMainEpisodioBinding.episodiosRv.layoutManager = episodiosLayoutManager
@@ -111,7 +111,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
             episodioActivityResultLauncher.launch(Intent(this,
                 EpisodioActivity::class.java).putExtra(MainTemporadaActivity.EXTRA_SERIE, serie).
                 putExtra(MainTemporadaActivity.EXTRA_TEMPORADA, temporada).putExtra(
-                EXTRA_NUMERO_EP, episodioslist.size))
+                EXTRA_POSICAO, episodioslist.size))
         }
     }
 
@@ -167,7 +167,7 @@ class MainEpisodioActivity : AppCompatActivity(), OnEpisodioClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.atualizarMi -> {
-            episodioAdapter.notifyDataSetChanged()
+                episodioAdapter.notifyDataSetChanged()
             true
         }
         else -> {false}

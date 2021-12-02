@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2866666666666667" />
+        <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_autenticacao.xml" value="0.2609375" />
+        <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_cadastrar_usuario.xml" value="0.275" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_episodio.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_main.xml" value="0.275" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_main_episodio.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_main_temporada.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_recuperar_senha.xml" value="0.2609375" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_serie.xml" value="0.275" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_temporada.xml" value="0.275" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/layout/activity_temporada2.xml" value="0.2609375" />
@@ -18,7 +21,7 @@
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/context_menu_serie.xml" value="0.275" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/context_menu_temporada.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/manu_episodio.xml" value="0.2713541666666667" />
-        <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/menu_main.xml" value="0.1109375" />
+        <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/menu_main.xml" value="0.4" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/menu_main1.xml" value="0.1859375" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/menu_serie.xml" value="0.275" />
         <entry key="..\:/Users/Willian Sumida/Desktop/5 SEMESTRE/PDM/SeriesManager/app/src/main/res/menu/menu_temporada.xml" value="0.2713541666666667" />

@@ -27,7 +27,7 @@ public class EpisodioActivity extends AppCompatActivity {
         activityEpisodioBinding = ActivityEpisodioBinding.inflate(getLayoutInflater());
         setContentView(activityEpisodioBinding.getRoot());
 
-        numeroEpisodio = (getIntent().getIntExtra(MainEpisodioActivity.EXTRA_NUMERO_EP, 0) + 1);
+        numeroEpisodio = (getIntent().getIntExtra(MainEpisodioActivity.EXTRA_POSICAO, 0) + 1);
 
         setTitle("Episodio");
 
@@ -62,6 +62,7 @@ public class EpisodioActivity extends AppCompatActivity {
 
                     //se foi uma edicao retornar a posicao
                     if (posicao != -1){
+                        Log.i("episode" , String.valueOf(posicao));
                         resultIntent.putExtra(MainEpisodioActivity.EXTRA_POSICAO, posicao);
                     }
                     setResult(RESULT_OK, resultIntent);

@@ -26,7 +26,7 @@ public class TemporadaActivity extends AppCompatActivity {
         activityTemporadaBinding = ActivityTemporadaBinding.inflate(getLayoutInflater());
         setContentView(activityTemporadaBinding.getRoot());
 
-        numeroTemporada = (getIntent().getIntExtra(MainTemporadaActivity.EXTRA_QNTD_TEMP, 0) + 1);
+        numeroTemporada = (getIntent().getIntExtra(MainTemporadaActivity.EXTRA_POSICAO, 0) + 1);
 
         setTitle("Temporada");
 
